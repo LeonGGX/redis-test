@@ -1,0 +1,1 @@
+{"rustc":17053782215578274964,"features":"[]","target":1111583976623142345,"profile":9935990280773120926,"path":2965035273157499160,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown\\debug\\.fingerprint\\foreign-types-shared-fbfb8d67850f2775\\dep-lib-foreign_types_shared-fbfb8d67850f2775"}}],"rustflags":["--cfg","cargo_web"],"metadata":9487440287552878973}

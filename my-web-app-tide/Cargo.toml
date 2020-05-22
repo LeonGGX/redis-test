@@ -1,0 +1,9 @@
+[package]
+name = "my-web-app"
+version = "0.1.0"
+authors = ["lgeng"]
+edition = "2018"
+
+[dependencies]
+tide = "0.1.1"
+tera = "0.11.20"

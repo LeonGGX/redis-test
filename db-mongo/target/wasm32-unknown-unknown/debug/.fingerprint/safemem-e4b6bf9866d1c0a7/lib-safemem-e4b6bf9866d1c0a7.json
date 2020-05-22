@@ -1,0 +1,1 @@
+{"rustc":17053782215578274964,"features":"[\"default\", \"std\"]","target":7829281411745552895,"profile":9935990280773120926,"path":12572206377784768453,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown\\debug\\.fingerprint\\safemem-e4b6bf9866d1c0a7\\dep-lib-safemem-e4b6bf9866d1c0a7"}}],"rustflags":["--cfg","cargo_web"],"metadata":5961032267634545031}

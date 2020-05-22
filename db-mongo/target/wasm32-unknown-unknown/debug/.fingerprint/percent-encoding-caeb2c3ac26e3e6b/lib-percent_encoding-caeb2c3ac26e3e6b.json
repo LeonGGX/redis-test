@@ -1,0 +1,1 @@
+{"rustc":17053782215578274964,"features":"[]","target":7240230170650929129,"profile":9935990280773120926,"path":17319651103942852798,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown\\debug\\.fingerprint\\percent-encoding-caeb2c3ac26e3e6b\\dep-lib-percent_encoding-caeb2c3ac26e3e6b"}}],"rustflags":["--cfg","cargo_web"],"metadata":7296236146002047887}

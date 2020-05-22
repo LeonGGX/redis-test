@@ -1,0 +1,1 @@
+{"rustc":17053782215578274964,"features":"[]","target":3650675185119913205,"profile":9935990280773120926,"path":15670963964888504538,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown\\debug\\.fingerprint\\semver-parser-e212bbd9a66fe88f\\dep-lib-semver_parser-e212bbd9a66fe88f"}}],"rustflags":["--cfg","cargo_web"],"metadata":4674865660837498837}

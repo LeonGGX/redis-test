@@ -1,0 +1,1 @@
+{"rustc":17053782215578274964,"features":"[]","target":4305255212375831529,"profile":9935990280773120926,"path":16999073508812191290,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown\\debug\\.fingerprint\\lazy_static-a80944d166d5d060\\dep-lib-lazy_static-a80944d166d5d060"}}],"rustflags":["--cfg","cargo_web"],"metadata":111743654650316589}

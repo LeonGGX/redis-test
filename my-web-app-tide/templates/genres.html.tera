@@ -1,0 +1,17 @@
+{% extends "base" %}
+
+{% block content %}
+<div class="w3-container">
+    <table class="w3-table w3-striped w3-border w3-hoverable" id="tble-genres">
+        <tr>
+            <th>Nom :</th>
+        </tr>
+
+        {% for genre in genres %}
+        <tr>
+            <td>{{genre["nom"]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

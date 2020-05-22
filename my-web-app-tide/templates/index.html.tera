@@ -1,0 +1,10 @@
+{% extends "base" %}
+
+{% block content %}
+<h1>This is our example blog application</h1>
+<p>
+    Let's explore what we can do with
+    <a href="https://rocket.rs">Rocket</a> and
+    <a href="https://www.rust-lang.org">Rust</a>
+</p>
+{% endblock content %}

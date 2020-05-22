@@ -1,0 +1,1 @@
+{"rustc":17053782215578274964,"features":"[\"alloc\", \"std\"]","target":14134132449596365798,"profile":9935990280773120926,"path":10000262220895715324,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown\\debug\\.fingerprint\\rand_core-423cace6f9fb3a30\\dep-lib-rand_core-423cace6f9fb3a30"}}],"rustflags":["--cfg","cargo_web"],"metadata":3036601509445419820}

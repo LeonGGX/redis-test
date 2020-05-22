@@ -1,0 +1,1 @@
+{"rustc":17053782215578274964,"features":"[]","target":9656121109315720830,"profile":9935990280773120926,"path":2004207131516311004,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown\\debug\\.fingerprint\\utf8-ranges-2083cad5be1d0164\\dep-lib-utf8_ranges-2083cad5be1d0164"}}],"rustflags":["--cfg","cargo_web"],"metadata":10219079003065423079}

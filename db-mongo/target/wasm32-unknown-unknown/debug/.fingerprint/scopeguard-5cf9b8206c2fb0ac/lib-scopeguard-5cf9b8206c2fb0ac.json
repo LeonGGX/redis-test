@@ -1,0 +1,1 @@
+{"rustc":17053782215578274964,"features":"[]","target":8057958599601384868,"profile":9935990280773120926,"path":15581639019833933319,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown\\debug\\.fingerprint\\scopeguard-5cf9b8206c2fb0ac\\dep-lib-scopeguard-5cf9b8206c2fb0ac"}}],"rustflags":["--cfg","cargo_web"],"metadata":8648443508444719667}

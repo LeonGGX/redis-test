@@ -1,0 +1,1 @@
+{"rustc":17053782215578274964,"features":"[]","target":11680772787092534394,"profile":9935990280773120926,"path":9737148010841761973,"deps":[],"local":[{"CheckDepInfo":{"dep_info":"wasm32-unknown-unknown\\debug\\.fingerprint\\smallvec-aefecc8cb093e514\\dep-lib-smallvec-aefecc8cb093e514"}}],"rustflags":["--cfg","cargo_web"],"metadata":11511323240339246835}
