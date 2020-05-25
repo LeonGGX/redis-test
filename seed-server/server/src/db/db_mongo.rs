@@ -1,16 +1,59 @@
-// src/db/db_mongo
+// shared/src/db/db_mongo.rs
 
 use bson::{doc, Document, from_bson, Bson, to_bson};
 use bson::oid::ObjectId;
 
 use crate::models::person::{Person, InsertablePerson,};
-use crate::db::mongo_connection;
 use crate::errors::errors::MyError;
+
+use r2d2::PooledConnection;
+use r2d2_mongodb::{
+    ConnectionOptions,
+    MongodbConnectionManager,
+};
+use mongodb::{
+    Client,
+    Collection,
+};
+
+use std::ops::Deref;
+
+pub(crate) type Pool = r2d2::Pool<MongodbConnectionManager>;
+pub struct Conn(pub PooledConnection<MongodbConnectionManager>);
+
+/*
+    create a connection pool of mongodb connections to allow a lot of users to modify db at same time.
+*/
+pub fn init_pool() -> Pool {
+    let manager = MongodbConnectionManager::new(
+        ConnectionOptions::builder()
+            .with_host("localhost", 27017)
+            .with_db("local")
+            .build(),
+    );
+    match Pool::builder().max_size(8).build(manager) {
+        Ok(pool) => pool,
+        Err(e) => panic!("Error: failed to create mongodb pool {}", e),
+    }
+}
+
+pub fn open_pool_connection() -> Result<Conn, r2d2::Error> {
+    let pool = init_pool();
+    let db = pool.get();
+    Ok(Conn(db?))
+}
+
+pub fn get_collection() -> Result<Collection, MyError> {
+    let client = Client::with_uri_str("mongodb://localhost:27017/")?;
+    let db = client.database("local");
+    let collection = db.collection("Persons");
+    Ok(collection)
+}
 
 
 pub fn add_person(pers: Person) -> Result<Person, MyError> {
 
-    let coll = mongo_connection::get_collection()?;
+    let coll = get_collection()?;
     let insertable = InsertablePerson::from_person(pers.clone());
     let ret_val = insertable.clone();
     let value = doc! {"nom" : insertable.nom, "prenom" : insertable.prenom};
@@ -32,7 +75,7 @@ pub fn add_person(pers: Person) -> Result<Person, MyError> {
 
 pub fn get_list_persons() -> Result<Vec<Person>, MyError> {
 
-    let cursor = mongo_connection::get_collection()?.find(None, None)?;
+    let cursor = get_collection()?.find(None, None)?;
     let res: Result<Vec<_>,_> = cursor
         .map(|row|row.and_then(|item|Ok(from_bson::<Person>(bson::Bson::Document(item))?)))
         .collect();
@@ -42,7 +85,7 @@ pub fn get_list_persons() -> Result<Vec<Person>, MyError> {
 
 pub fn get_person_by_id(pers_id: &str) -> Result<Option<Person>, MyError> {
 
-    let coll = mongo_connection::get_collection()?;
+    let coll = get_collection()?;
     let cursor: Option<Document> =
         coll.find_one(
             Some(doc! { "_id": ObjectId::with_string(pers_id)?}),
@@ -55,7 +98,7 @@ pub fn get_person_by_id(pers_id: &str) -> Result<Option<Person>, MyError> {
 
 pub fn modify_person_by_id(pers_id: &str, modifyed_person: Person) -> Result<Option<Person>, MyError> {
 
-    let coll = mongo_connection::get_collection()?;
+    let coll = get_collection()?;
     let cursor : Option<Document> =
         coll.find_one_and_replace(
             doc! {"_id": ObjectId::with_string(pers_id)?},
@@ -71,7 +114,7 @@ pub fn modify_person_by_id(pers_id: &str, modifyed_person: Person) -> Result<Opt
 
 pub fn delete_person(pers: Person) -> Result<Option<Person>, MyError> {
 
-    let coll = mongo_connection::get_collection()?;
+    let coll = get_collection()?;
     if let Bson::Document(mut doc) = to_bson(&pers)? {
         let cursor: Option<Document> =
             coll.find_one_and_delete(doc, Some(Default::default()))?;

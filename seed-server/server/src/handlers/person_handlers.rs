@@ -8,9 +8,8 @@ use actix_web::{
 };
 
 use crate::AppState;
-//use crate::db::mongo_connection::Conn;
 use crate::db::db_mongo;
-use crate::models::person::{Person, ListPersons};
+use shared::models::person::{Person, ListPersons};
 
 
 
@@ -20,7 +19,7 @@ pub async fn simple_index(data: web::Data<Mutex<AppState>>) -> String {
 }
 
 
-pub async fn list_persons_str(state: web::Data<Mutex<AppState>>) -> impl Responder {
+pub async fn list_persons_str(_state: web::Data<Mutex<AppState>>) -> impl Responder {
 
     //let conn = &state.lock().unwrap().conn;
     //let vec_pers = conn.get_list_persons().unwrap();
@@ -33,14 +32,14 @@ pub async fn list_persons_str(state: web::Data<Mutex<AppState>>) -> impl Respond
     HttpResponse::Ok().body(str)
 }
 
-pub async fn list_persons_json(state: web::Data<Mutex<AppState>>) -> impl Responder {
+pub async fn list_persons_json(_state: web::Data<Mutex<AppState>>) -> impl Responder {
 
     let res = db_mongo::get_list_persons().unwrap();
     HttpResponse::Ok().json(res)
 }
 
 
-pub async fn list_persons_json_from_list(state: web::Data<Mutex<AppState>>) -> impl Responder {
+pub async fn list_persons_json_from_list(_state: web::Data<Mutex<AppState>>) -> impl Responder {
 
     /*
     let conn = &state.lock().unwrap().conn;
@@ -62,10 +61,11 @@ pub async fn list_persons_json_from_list(state: web::Data<Mutex<AppState>>) -> i
     HttpResponse::Ok().json(list)
 }
 
-pub async fn add_person(pers: web::Json<Person>) -> impl Responder {
+pub async fn add_person(_state: web::Data<Mutex<AppState>>, pers: web::Json<Person>) -> impl Responder {
 
     let my_person = pers.into_inner();
-    if let new_person = db_mongo::add_person(my_person){
+
+    if let new_person = db_mongo::add_person(my_person) {
         HttpResponse::Ok().json(new_person.unwrap())
     } else {
         HttpResponse::InternalServerError().body("nouvelle personne pas ajoutée")

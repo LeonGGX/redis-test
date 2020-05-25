@@ -1,14 +1,25 @@
-// src/models/person-old-client
+// shared/src/models/person.rs
 
-use serde_derive::*;
+use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Person {
     #[serde(rename = "_id")]  // Use MongoDB's special primary key field name when serializing
     pub id: Option<bson::oid::ObjectId>,
     pub nom: String,
     pub prenom: String,
 }
+
+impl Default for Person {
+    fn default()-> Self {
+        Person {
+            id: None,
+            nom: " ".into(),
+            prenom: " ".into(),
+        }
+    }
+}
+
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct InsertablePerson {
@@ -17,6 +28,7 @@ pub struct InsertablePerson {
 }
 
 impl InsertablePerson {
+
     pub fn from_person(person: Person) -> InsertablePerson {
         InsertablePerson {
             nom: person.nom,
@@ -33,20 +45,20 @@ impl InsertablePerson {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct ListPersons {
-    pub list_pers: Vec<Person>,
+    pub list_persons: Vec<Person>,
 }
 
 impl ListPersons {
     pub fn new(vec_pers: Vec<Person>) -> Self {
-        ListPersons{list_pers: vec_pers}
+        ListPersons{list_persons: vec_pers}
     }
 
     pub fn to_vec_string(&self) -> Vec<String> {
         let list = self.clone();
         let mut vec_str: Vec<String> = Vec::new();
-        for pers in list.list_pers {
+        for pers in list.list_persons {
             vec_str.push(InsertablePerson::from_person(pers).to_string());
         }
         vec_str
@@ -63,22 +75,10 @@ impl ListPersons {
     }
 }
 
-#[derive(Debug, Clone, Eq, PartialEq, Ord, PartialOrd, Serialize, Deserialize)]
-pub struct Data {
-    pub list_persons : Vec<Person>,
-}
-
-impl Data{
-    pub fn store(&self) {
-        local_store::store_data(self);
-    }
-}
-
-impl Default for Data {
+impl Default for ListPersons {
     fn default() -> Self {
         Self {
             list_persons: vec![],
         }
     }
 }
-

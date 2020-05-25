@@ -1,5 +1,4 @@
-// error
-//#[macro_use] extern crate failure;
+// shared/src/errors/errors.rs
 
 use bson::{
     oid::Error as BsonOidError,
@@ -32,34 +31,3 @@ pub enum MyError {
     #[error("Invalid document id")]
     BsonOid(#[from] BsonOidError),
 }
-/*
-impl From<MongoError> for Error {
-    fn from(e: MongoError) -> Self {
-        Error::Mongo(e)
-    }
-}
-
-impl From<MongoWriteError> for Error {
-    fn from(e: MongoWriteError) -> Self {
-        Error::MongoWriteError(e)
-    }
-}
-
-impl From<BsonDecoderError> for Error {
-    fn from(e: BsonDecoderError) -> Self {
-        Error::BsonDecode(e)
-    }
-}
-
-impl From<BsonEncoderError> for Error {
-    fn from(e: BsonEncoderError) -> Self {
-        Error::BsonEncode(e)
-    }
-}
-
-impl From<BsonOidError> for Error {
-    fn from(e: BsonOidError) -> Self {
-        Error::BsonOid(e)
-    }
-}
-*/
