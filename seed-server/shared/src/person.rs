@@ -1,19 +1,19 @@
 // shared/src/models/person.rs
 
-use serde::{Serialize, Deserialize};
 use core::fmt;
 use serde::export::Formatter;
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Person {
-    #[serde(rename = "_id")]  // Use MongoDB's special primary key field name when serializing
+    #[serde(rename = "_id")] // Use MongoDB's special primary key field name when serializing
     pub id: Option<bson::oid::ObjectId>,
     pub nom: String,
     pub prenom: String,
 }
 
 impl Default for Person {
-    fn default()-> Self {
+    fn default() -> Self {
         Self {
             id: None,
             nom: " ".into(),
@@ -22,15 +22,13 @@ impl Default for Person {
     }
 }
 
-
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct InsertablePers {
-    pub nom : String,
-    pub prenom : String,
+    pub nom: String,
+    pub prenom: String,
 }
 
 impl InsertablePers {
-
     pub fn from_person(person: Person) -> Self {
         Self {
             nom: person.nom,
@@ -52,7 +50,9 @@ pub struct ListPersons {
 
 impl ListPersons {
     pub fn new(vec_pers: Vec<Person>) -> Self {
-        Self {list_persons: vec_pers}
+        Self {
+            list_persons: vec_pers,
+        }
     }
 
     pub fn to_vec_string(&self) -> Vec<String> {

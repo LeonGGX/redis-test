@@ -1,15 +1,10 @@
 // shared/src/errors/errors.rs
 
 use bson::{
-    oid::Error as BsonOidError,
-    DecoderError as BsonDecoderError,
-    EncoderError as BsonEncoderError
+    oid::Error as BsonOidError, DecoderError as BsonDecoderError, EncoderError as BsonEncoderError,
 };
 
-use mongodb::{
-    error::ErrorKind as MongoErrorKind,
-    error::Error as MongoError
-};
+use mongodb::{error::Error as MongoError, error::ErrorKind as MongoErrorKind};
 
 use thiserror::Error;
 
