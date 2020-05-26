@@ -64,23 +64,15 @@ pub async fn list_persons_json_from_list(_state: web::Data<Mutex<AppState>>) -> 
 pub async fn add_person(_state: web::Data<Mutex<AppState>>, pers: web::Json<Person>) -> impl Responder {
 
     let my_person = pers.into_inner();
-
-    if let new_person = db_mongo::add_person(my_person) {
-        HttpResponse::Ok().json(new_person.unwrap())
-    } else {
-        HttpResponse::InternalServerError().body("nouvelle personne pas ajoutée")
-    }
+    let new_person = db_mongo::add_person(my_person);
+    HttpResponse::Ok().json(new_person.unwrap())
 }
 
 pub async fn show_one_person_id(id: web::Path<String>) -> impl Responder {
 
     let in_id = id.into_inner();
-
-    if let found_person = Some(db_mongo::get_person_by_id(&in_id).unwrap()) {
-        HttpResponse::Ok().json(found_person)
-    } else {
-        HttpResponse::BadRequest().body("Pas trouvé")
-    }
+    let found_person = Some(db_mongo::get_person_by_id(&in_id).unwrap());
+    HttpResponse::Ok().json(found_person)
 }
 
 pub async fn modify_person(id: web::Path<String>, modifyed_person: web::Json<Person>) -> impl Responder {

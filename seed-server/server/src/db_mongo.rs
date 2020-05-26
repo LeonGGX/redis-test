@@ -16,7 +16,6 @@ use mongodb::{
     Collection,
 };
 
-use std::ops::Deref;
 
 pub(crate) type Pool = r2d2::Pool<MongodbConnectionManager>;
 pub struct Conn(pub PooledConnection<MongodbConnectionManager>);
@@ -54,7 +53,7 @@ pub fn get_collection() -> Result<Collection, MyError> {
 pub fn add_person(pers: Person) -> Result<Person, MyError> {
 
     let coll = get_collection()?;
-    let insertable = InsertablePerson::from_person(pers.clone());
+    let insertable = InsertablePerson::from_person(pers);
     let ret_val = insertable.clone();
     let value = doc! {"nom" : insertable.nom, "prenom" : insertable.prenom};
     let result = coll.insert_one(value, None)?;

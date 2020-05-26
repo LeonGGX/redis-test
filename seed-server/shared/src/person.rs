@@ -1,6 +1,8 @@
 // shared/src/models/person.rs
 
 use serde::{Serialize, Deserialize};
+use core::fmt;
+use serde::export::Formatter;
 
 #[derive(Serialize, Deserialize, Debug, Clone, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Person {
@@ -12,7 +14,7 @@ pub struct Person {
 
 impl Default for Person {
     fn default()-> Self {
-        Person {
+        Self {
             id: None,
             nom: " ".into(),
             prenom: " ".into(),
@@ -22,26 +24,24 @@ impl Default for Person {
 
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct InsertablePerson {
+pub struct InsertablePers {
     pub nom : String,
     pub prenom : String,
 }
 
-impl InsertablePerson {
+impl InsertablePers {
 
-    pub fn from_person(person: Person) -> InsertablePerson {
-        InsertablePerson {
+    pub fn from_person(person: Person) -> Self {
+        Self {
             nom: person.nom,
             prenom: person.prenom,
         }
     }
+}
 
-    pub fn to_string(&self) -> String {
-        let mut str = String::new();
-        str.push_str(&self.nom);
-        str.push_str(" ");
-        str.push_str(&self.prenom);
-        str
+impl fmt::Display for InsertablePers {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        write!(f, "\n,{},\n, {}, \n", self.nom, self.prenom)
     }
 }
 
@@ -52,14 +52,14 @@ pub struct ListPersons {
 
 impl ListPersons {
     pub fn new(vec_pers: Vec<Person>) -> Self {
-        ListPersons{list_persons: vec_pers}
+        Self {list_persons: vec_pers}
     }
 
     pub fn to_vec_string(&self) -> Vec<String> {
         let list = self.clone();
         let mut vec_str: Vec<String> = Vec::new();
         for pers in list.list_persons {
-            vec_str.push(InsertablePerson::from_person(pers).to_string());
+            vec_str.push(InsertablePers::from_person(pers).to_string());
         }
         vec_str
     }

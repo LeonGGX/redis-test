@@ -8,7 +8,6 @@ use bson::{
 
 use mongodb::{
     error::ErrorKind as MongoErrorKind,
-    error::WriteFailure as MongoWriteFailure,
     error::Error as MongoError
 };
 

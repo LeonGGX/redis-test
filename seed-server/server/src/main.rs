@@ -11,26 +11,21 @@ use actix_web::{
     middleware::{Logger},
 };
 
-use env_logger;
-
 // import driver mongodb
 use mongodb::error::Error as MongoError;
 
+//mod errors;
+//mod person_handlers;
+//mod db_mongo;
 
-// les différents modules qui correspondent aux sous-dossiers
-mod db;
-//mod models;
-mod handlers;
-mod errors;
+// import des fichiers shared
+use shared::person;
 
-
-use shared::models;
-
-use crate::db::db_mongo;
-use crate::db::db_mongo::Conn;
 
 // import des fichiers internes
-use crate::handlers::person_handlers::*;
+use crate::person_handlers;
+use crate::errors;
+use crate::db_mongo::Conn;
 
 ///
 /// la structure AppState permet de mettre des données
@@ -100,7 +95,7 @@ mod tests {
     use actix_web::dev::Service;
     use actix_web::{http, test, web, App, Error};
 
-    use crate::models::person::Person;
+    use shared::person::Person;
 
     ///
     /// Test Ajouter une personne
