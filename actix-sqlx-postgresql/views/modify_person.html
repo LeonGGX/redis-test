@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{super()}}
+{% endblock head%}
+
+{% block intitle %}
+{{super()}}
+{% endblock intitle %}
+
+{% block btnbar %}
+{{super()}}
+{% endblock btnbar %}
+
+{% block content %}
+<div id="modify-person" class="w3-container">
+    <h3>PERSONNE SELECTIONNEE</h3>
+    <form action=/persons/{{person.id}} method="put">
+        <input class="id w3-input w3-border" id="modifidi" name="id" value="{{person.id}}">
+        <label class="w3-label">
+            Nom:
+            <input class="nom w3-input w3-border" id="modifnom" name="nom" value={{person.last_name}}>
+        </label>
+        <label>
+            Prénom:
+            <input class="prenom w3-input w3-border" id="modifprenom" name="prenom" value={{person.first_name}}>
+        </label>
+
+        <button  class="w3-button w3-margin-top w3-red w3-round-xxlarge w3-padding" type=submit>Modifier</button>
+        <button  class="w3-button w3-margin-top w3-red w3-round-xxlarge w3-padding" type=submit>Effacer</button>
+    </form>
+</div>
+{% endblock content %}
+
+{% block footer %}
+{{super()}}
+{% endblock footer %}

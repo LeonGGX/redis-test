@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{super()}}
+{% endblock head%}
+
+{% block intitle %}
+{{super()}}
+{% endblock intitle %}
+
+{% block btnbar %}
+{{super()}}
+{% endblock btnbar %}
+
+{% block content %}
+<body style="padding:20px">
+<header class="w3-container w3-center w3-blue">
+    <h3>Personne sélectionnée</h3>
+</header>
+<div class="w3-container" id="tbl-one-person">
+    <table class="w3-table w3-striped w3-border w3-hoverable" id="tbl_persons">
+        <tr>
+            <th>ID :</th>
+            <th scope="col">Nom :</th>
+            <th>Prénom :</th>
+        </tr>
+        <tr>
+            <td class="row_id w3-text-red w3-xlarge" id = "idi">{{person.id}}</td>
+            <td class="row_nom w3-text-red w3-xlarge">{{person.last_name}}</td>
+            <td class="row_prenom w3-text-red w3-xlarge">{{person.first_name}}</td>
+        </tr>
+    </table>
+    <button  class="w3-button w3-margin-top w3-red w3-round-xxlarge w3-padding" onclick="ClickModify()">Modifier</button>
+    <button  class="w3-button w3-margin-top w3-red w3-round-xxlarge w3-padding" type=submit>Effacer</button>
+</div>
+</body>
+<script>
+    function ClickModify() {
+        var id = document.getElementById("idi").innerHTML;
+        var str = id.toString();
+        alert(str);
+    }
+</script>
+{% endblock content %}
+
+{% block footer %}
+{{super()}}
+{% endblock footer %}

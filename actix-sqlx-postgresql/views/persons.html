@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{super()}}
+{% endblock head%}
+
+{% block intitle %}
+    {{super()}}
+{% endblock intitle %}
+
+{% block btnbar %}
+    {{super()}}
+{% endblock btnbar %}
+
+{% block content %}
+<body style="padding:20px">
+    <div class="w3-container" id="cntr-tbl-persons">
+        <table class="w3-table w3-striped w3-border w3-hoverable" id="tbl_persons">
+            <tr>
+                <th>ID :</th>
+                <th scope="col">Nom :</th>
+                <th>Prénom :</th>
+            </tr>
+
+            {% for person in persons %}
+                <tr onclick="Click(this)" ondblclick="DblClick(this)">
+                    <td class="row_id">{{person.id}}</td>
+                    <td class="row_nom">{{person.last_name}}</td>
+                    <td class="row_prenom">{{person.first_name}}</td>
+                </tr>
+            {% endfor %}
+
+        </table>        
+    </div>
+
+    <div class="w3-bar w3-black">
+        <button class="w3-bar-item w3-button tablink w3-red" onclick="treatPerson(event,'add-person')">
+            <b>Nouveau</b>
+        </button>
+        <button class="w3-bar-item w3-button tablink" onclick="treatPerson(event,'modify-person')">
+            <b>Modifier</b>
+        </button>
+        <button class="w3-bar-item w3-button tablink" onclick="treatPerson(event, 'delete-person')">
+            <b>Effacer</b>
+        </button>
+    </div>
+
+    <div id="add-person" class="w3-container person">
+        <h3>Ajouter une Personne à la DB</h3>
+        <form action=/persons method=POST>
+            <label>
+                Nom:
+                <input name="nom">
+            </label>
+            <label>
+                Prénom:
+                <input name="prenom">
+            </label>
+
+            <button type=submit>Ajouter</button>
+            <input type="button" class="W3-button W3-light-green" value="Annuler" onclick="hideNew()"/>
+        </form>
+    </div>
+
+    <div id="modify-person" class="w3-container person" style="display:none">
+        <h3>Modifier une Personne de la DB</h3>
+        <form action=/persons method="post">
+            <input type="text" id="modifidi" name="id" hidden>
+            <label>
+                Nom:
+                <input type="text" id="modifnom" name="nom" value="rien">
+            </label>
+            <label>
+                Prénom:
+                <input type="text" id="modifprenom" name="prenom">
+            </label>
+
+            <button type=submit>Modifier</button>
+            <input type="button" class="W3-button W3-light-green" value="Annuler" onclick="hideNew()"/>
+        </form>
+    </div>
+
+    <div id="delete-person" class = "w3-container person" style="display:none">
+        <h3>Effacer une Personne de la DB</h3>
+        <form action=/persons method=DELETE>
+            <input type="text" id="del-id" name="del-id" hidden>
+            <label>
+                Nom:
+                <input type="text" id="del-nom" name="del-nom">
+            </label>
+            <label>
+                Prénom:
+                <input type="text" id="del-prenom" name="del-prenom">
+            </label>
+
+            <button type=submit>Effacer</button>
+            <input type="button" class="W3-button W3-light-green" value="Annuler" onclick="hideNew()"/>
+        </form>
+    </div>
+    <!--
+    <script scr="/scripts/script.js"></script>
+    -->
+    <script>   
+        function Click(x) {
+            var id = x.getElementsByClassName("row_id")[0].innerHTML;
+            var nom = x.getElementsByClassName("row_nom")[0].innerHTML;
+            var prenom = x.getElementsByClassName("row_prenom")[0].innerHTML;
+
+            document.getElementById("modifidi").value = id;
+            document.getElementById("modifnom").value = nom;
+            document.getElementById("modifprenom").value = prenom;
+
+            document.getElementById("del-id").value = id;
+            document.getElementById("del-nom").value = nom;
+            document.getElementById("del-prenom").value = prenom;
+        }
+
+        function DblClick(x) {
+             var id = x.getElementsByClassName("row_id")[0].innerHTML;
+             var str = id.toString();
+             var fin = "persons/" + str;
+             window.location.assign(fin);
+        }
+
+        function treatPerson(evt, persTreatment) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("person");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+
+            document.getElementById(persTreatment).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        }
+
+        function showNew() {
+            var x = document.getElementById("show-person");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+
+        function hideNew(){
+            var x = document.getElementById("input-nom");
+            x.value = " ";
+        }        
+    </script>
+    {% endblock content %}
+
+    {% block footer %}
+    {{super()}}
+    {% endblock footer %}

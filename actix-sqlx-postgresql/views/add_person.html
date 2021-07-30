@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{super()}}
+    <style>
+        .add-person {
+            padding: 20px;
+            background-color: white
+        }
+    </style>
+{% endblock head%}
+
+{% block intitle %}
+    {{super()}}
+{% endblock intitle %}
+
+{% block btnbar %}
+    {{super()}}
+{% endblock btnbar %}
+
+{% block content %}
+<div id="add-person" class="add-person w3-container w3-padding">
+    <h3>Ajouter une Personne à la DB</h3>
+    <form action=/add method=POST>
+        <label class="w3-label">
+            Nom:
+            <input class="nom w3-input w3-border" name="last_name">
+        </label>
+        <label class="w3-label">
+            Prénom:
+            <input class="w3-input w3-border" name="first_name">
+        </label>
+
+        <button  class="w3-button w3-margin-top w3-red w3-round-xxlarge" type=submit>Ajouter</button>
+    </form>
+</div>
+{% endblock content %}
+
+{% block footer %}
+    {{super()}}
+{% endblock footer %}

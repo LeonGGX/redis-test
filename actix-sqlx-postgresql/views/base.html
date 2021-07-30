@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <title>GESTION DB PERSONNES</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css"
+          href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: light-green;
+          color: black;
+          text-align: center;
+        }
+        .block_content {
+            padding: 20px;
+            background-color: white;
+        }
+    </style>
+</head>
+{% endblock head %}
+<body>
+    {% block intitle %}
+    <header class="intitle w3-container w3-white w3-center w3-padding-small">
+        <h1>GESTION BASE DE DONNEES DES PERSONNES</h1>
+    </header>
+    {% endblock intitle %}
+
+    {% block btnbar %}
+    <div id="button_bar" class="button_bar w3-bar w3-padding-large w3-white">
+        <a href="/persons" class="w3-bar-item w3-button w3-red w3-round-xxlarge w3-padding">Liste des Personnes</a>
+        <a href="/add" class="w3-bar-item w3-button w3-blue w3-round-xxlarge w3-padding">Ajouter une Personne</a>
+        <a href="/" class="w3-bar-item w3-button w3-yellow w3-round-xxlarge w3-padding w3-right">Home</a>
+    </div>
+    {% endblock btnbar %}
+
+    <div id="block_content" class="block_content w3-container">
+    {% block content %}  {% endblock content %}
+    </div>
+
+    {% block footer %}
+    <footer id="footer" class="footer w3-container">
+        &copy; Copyright 2020 by <a href="http://domain.invalid/">Léon GENGOUX</a>
+    </footer>
+    {% endblock footer %}
+</body>
+</html>
