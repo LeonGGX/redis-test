@@ -1,0 +1,10 @@
+[package]
+name = "redis-test"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+redis = { version = "0.22.1", features = ["tokio-comp", "aio", "connection-manager"] }
+tokio = { version = "1.21.2", features = ["full"] }
